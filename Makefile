@@ -1,43 +1,39 @@
-.PHONY: default help
+# core
+.DEFAULT_GOAL := help
+WORKDIR       := $(shell pwd)
+SHELL         := /usr/bin/env bash
 
-default: help
-help: ## help: display make targets
-	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
-		awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m make %-20s -> %s\n\033[0m", $$1, $$2}'
+# vcs info
+VCS_COMMIT   := $(shell git rev-parse --short=7 HEAD)
+VCS_IS_DIRTY := $(shell test -n "$$(git status --porcelain)" && echo "-alpha")
 
-# make: app info
-APP_NAME    := cardmod
-APP_WORKDIR := $(shell pwd)
-APP_LOG_FMT := `/bin/date "+%Y-%m-%d %H:%M:%S %z [$(APP_NAME)]"`
+# colors are pretty
+COLOR_CYAN=\033[0;36m
+COLOR_GREEN=\033[0;32m
+COLOR_MAGENTA=\033[0;35m
+COLOR_YELLOW=\033[0;33m
+COLOR_NONE=\033[0m
 
-# --------------------------------------------------
-# Build Targets
-# --------------------------------------------------
-BIN_DIR   := $(APP_WORKDIR)/bin
-BUILD_DIR := $(APP_WORKDIR)/target
+# project information
+OWNER_NAME      := iamnande
+PROJECT_NAME    := cardmod-rs 
+PROJECT_VERSION ?= 0.2.0$(VCS_IS_DIRTY)
+PROJECT_SLUG    := $(OWNER_NAME)-$(PROJECT_NAME)-$(PROJECT_VERSION)
 
-.PHONY: build-clean
-build-clean: ## build: clean the build workspace
-	@echo $(APP_LOG_FMT) "cleaning build workspace"
-	@rm -rf $(BUILD_DIR) $(BIN_DIR)
+# modules
+include mk/log.mk
+include mk/dev.mk
+include mk/qa.mk
 
-.PHONY: build-binary
-build-binary: build-clean ## build: build a release binary file
-	@echo $(APP_LOG_FMT) "building release binary"
-	@cargo b --release
-	@mkdir $(BIN_DIR) \
-		&& cp $(BUILD_DIR)/release/$(APP_NAME) $(BIN_DIR)
+.PHONY: help
+help: ## help: display available targets
+	@echo -e "${COLOR_GREEN}================================================================================${COLOR_NONE}"
+	@echo -e "                    [ ${COLOR_MAGENTA}$(OWNER_NAME)${COLOR_YELLOW}/${COLOR_MAGENTA}$(PROJECT_NAME) ${COLOR_NONE} - ${COLOR_MAGENTA}$(PROJECT_VERSION)${COLOR_NONE} ] "
+	@echo -e "${COLOR_GREEN}================================================================================${COLOR_NONE}"
+	@grep -h -E '^[a-zA-Z0-9_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
+		awk 'BEGIN {FS = ":.*?## "} \
+		{printf "${COLOR_CYAN}%-35s${COLOR_NONE} %s %s\n", $$1, "     ", $$2}'
 
-# --------------------------------------------------
-# Test Targets
-# --------------------------------------------------
-
-.PHONY: test-lint
-test-lint: ## test: check for lint failures
-	@echo $(APP_LOG_FMT) "checking for lint failures"
-	@find . -type f -name "*.rs" -exec rustfmt -v '{}' +
-
-.PHONY: test-clippy
-test-clippy: ## test: check for clippy suggestions
-	@echo $(APP_LOG_FMT) "checking for clippy suggestions"
-	@cargo clippy --workspace --all-features
+.PHONY: version
+version: ## help: display version
+	@echo $(PROJECT_VERSION)
