@@ -1,6 +1,7 @@
 #[repr(u8)]
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Hash)]
 pub enum Card {
+    // level one
     Geezard,
     Funguar,
     BiteBug,
@@ -11,6 +12,8 @@ pub enum Card {
     BloodSoul,
     Caterchipillar,
     Cockatrice,
+
+    // level two
     Grat,
     Buel,
     Mesmerize,
@@ -22,6 +25,8 @@ pub enum Card {
     Grendel,
     Jelleye,
     GrandMantis,
+
+    // level three
     Forbidden,
     Armadodo,
     TriFace,
@@ -32,6 +37,8 @@ pub enum Card {
     Cactuar,
     Tonberry,
     AbyssWorm,
+
+    // level four
     Turtapod,
     Vysage,
     TRexaur,
@@ -43,6 +50,8 @@ pub enum Card {
     BlueDragon,
     Adamantoise,
     Hexadragon,
+
+    // level five
     IronGiant,
     Behemoth,
     Chimera,
@@ -53,6 +62,8 @@ pub enum Card {
     Elnoyle,
     TonberryKing,
     WedgeBiggs,
+
+    // level six
     FujinRaijin,
     Elvoret,
     XATM092,
@@ -64,6 +75,8 @@ pub enum Card {
     Oilboyle,
     ShumiTribe,
     Krysta,
+
+    // level seven
     Propagator,
     JumboCactuar,
     TriPoint,
@@ -75,6 +88,8 @@ pub enum Card {
     RedGiant,
     Catoblepas,
     UltimaWeapon,
+
+    // level eight
     ChubbyChocobo,
     Angelo,
     Gilgamesh,
@@ -86,6 +101,8 @@ pub enum Card {
     Siren,
     Sacred,
     Minotaur,
+
+    // level nine
     Carbuncle,
     Diablos,
     Leviathan,
@@ -97,6 +114,8 @@ pub enum Card {
     Bahamut,
     Doomtrain,
     Eden,
+
+    // level ten
     Ward,
     Kiros,
     Laguna,
@@ -113,44 +132,121 @@ pub enum Card {
 impl Card {
     pub const fn level(self) -> Level {
         match self {
-            Card::Geezard | Card::Funguar | Card::BiteBug | Card::RedBat
-            | Card::Gayla | Card::Gesper | Card::FastitocalonF | Card::BloodSoul
-            | Card::Caterchipillar | Card::Cockatrice => Level::One,
+            Card::Geezard
+            | Card::Funguar
+            | Card::BiteBug
+            | Card::RedBat
+            | Card::Gayla
+            | Card::Gesper
+            | Card::FastitocalonF
+            | Card::BloodSoul
+            | Card::Caterchipillar
+            | Card::Cockatrice => Level::One,
 
-            Card::Grat | Card::Buel | Card::Mesmerize | Card::GlacialEye
-            | Card::Belhelmel | Card::Thrustaevis | Card::Anacondaur | Card::Creeps
-            | Card::Grendel | Card::Jelleye | Card::GrandMantis => Level::Two,
+            Card::Grat
+            | Card::Buel
+            | Card::Mesmerize
+            | Card::GlacialEye
+            | Card::Belhelmel
+            | Card::Thrustaevis
+            | Card::Anacondaur
+            | Card::Creeps
+            | Card::Grendel
+            | Card::Jelleye
+            | Card::GrandMantis => Level::Two,
 
-            Card::Forbidden | Card::Armadodo | Card::TriFace | Card::Fastitocalon
-            | Card::SnowLion | Card::Ochu | Card::DeathClaw | Card::Cactuar
-            | Card::Tonberry | Card::AbyssWorm => Level::Three,
+            Card::Forbidden
+            | Card::Armadodo
+            | Card::TriFace
+            | Card::Fastitocalon
+            | Card::SnowLion
+            | Card::Ochu
+            | Card::DeathClaw
+            | Card::Cactuar
+            | Card::Tonberry
+            | Card::AbyssWorm => Level::Three,
 
-            Card::Turtapod | Card::Vysage | Card::TRexaur | Card::Bomb | Card::Blitz
-            | Card::Wendigo | Card::Torama | Card::Imp | Card::BlueDragon
-            | Card::Adamantoise | Card::Hexadragon => Level::Four,
+            Card::Turtapod
+            | Card::Vysage
+            | Card::TRexaur
+            | Card::Bomb
+            | Card::Blitz
+            | Card::Wendigo
+            | Card::Torama
+            | Card::Imp
+            | Card::BlueDragon
+            | Card::Adamantoise
+            | Card::Hexadragon => Level::Four,
 
-            Card::IronGiant | Card::Behemoth | Card::Chimera | Card::PuPu | Card::Elastoid
-            | Card::GIM47N | Card::Malboro | Card::Elnoyle | Card::TonberryKing
+            Card::IronGiant
+            | Card::Behemoth
+            | Card::Chimera
+            | Card::PuPu
+            | Card::Elastoid
+            | Card::GIM47N
+            | Card::Malboro
+            | Card::Elnoyle
+            | Card::TonberryKing
             | Card::WedgeBiggs => Level::Five,
 
-            Card::FujinRaijin | Card::Elvoret | Card::XATM092 | Card::Granaldo
-            | Card::Gerogero | Card::Iguion | Card::Abadon | Card::Trauma
-            | Card::Oilboyle | Card::ShumiTribe | Card::Krysta => Level::Six,
+            Card::FujinRaijin
+            | Card::Elvoret
+            | Card::XATM092
+            | Card::Granaldo
+            | Card::Gerogero
+            | Card::Iguion
+            | Card::Abadon
+            | Card::Trauma
+            | Card::Oilboyle
+            | Card::ShumiTribe
+            | Card::Krysta => Level::Six,
 
-            Card::Propagator | Card::JumboCactuar | Card::TriPoint | Card::Gargantua
-            | Card::MobileType8 | Card::Sphinxara | Card::Tiamat | Card::BGH251F2
-            | Card::RedGiant | Card::Catoblepas | Card::UltimaWeapon => Level::Seven,
+            Card::Propagator
+            | Card::JumboCactuar
+            | Card::TriPoint
+            | Card::Gargantua
+            | Card::MobileType8
+            | Card::Sphinxara
+            | Card::Tiamat
+            | Card::BGH251F2
+            | Card::RedGiant
+            | Card::Catoblepas
+            | Card::UltimaWeapon => Level::Seven,
 
-            Card::ChubbyChocobo | Card::Angelo | Card::Gilgamesh | Card::MiniMog
-            | Card::Chicobo | Card::Quezacotl | Card::Shiva | Card::Ifrit
-            | Card::Siren | Card::Sacred | Card::Minotaur => Level::Eight,
+            Card::ChubbyChocobo
+            | Card::Angelo
+            | Card::Gilgamesh
+            | Card::MiniMog
+            | Card::Chicobo
+            | Card::Quezacotl
+            | Card::Shiva
+            | Card::Ifrit
+            | Card::Siren
+            | Card::Sacred
+            | Card::Minotaur => Level::Eight,
 
-            Card::Carbuncle | Card::Diablos | Card::Leviathan | Card::Odin
-            | Card::Pandemona | Card::Cerberus | Card::Alexander | Card::Phoenix
-            | Card::Bahamut | Card::Doomtrain | Card::Eden => Level::Nine,
+            Card::Carbuncle
+            | Card::Diablos
+            | Card::Leviathan
+            | Card::Odin
+            | Card::Pandemona
+            | Card::Cerberus
+            | Card::Alexander
+            | Card::Phoenix
+            | Card::Bahamut
+            | Card::Doomtrain
+            | Card::Eden => Level::Nine,
 
-            Card::Ward | Card::Kiros | Card::Laguna | Card::Selphie | Card::Quistis
-            | Card::Irvine | Card::Zell | Card::Rinoa | Card::Edea | Card::Seifer
+            Card::Ward
+            | Card::Kiros
+            | Card::Laguna
+            | Card::Selphie
+            | Card::Quistis
+            | Card::Irvine
+            | Card::Zell
+            | Card::Rinoa
+            | Card::Edea
+            | Card::Seifer
             | Card::Squall => Level::Ten,
         }
     }
