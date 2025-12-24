@@ -6,7 +6,7 @@ cardmod gives you insights into how many and of which kinds of triple triad
 cards are required to yield N number of magic.
 """
 edition = "2024"
-rust-version = "1.94.0"
+rust-version = "1.91.0"
 
 # -------------------------#
 # dependencies             #
@@ -19,6 +19,6 @@ criterion = { version = "0.5.1", features = ["html_reports"] }
 # -------------------------#
 # do you like benchmarks?  #
 # -------------------------#
-[[bench]]
-name = "calculator"
-harness = false
+#[[bench]]
+#name = "calculator"
+#harness = false

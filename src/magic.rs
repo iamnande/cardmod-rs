@@ -58,6 +58,14 @@ pub enum Magic {
     Aura,
 }
 
+#[repr(u8)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Hash)]
+pub enum Purpose {
+    Offensive,
+    Restorative,
+    Defensive,
+}
+
 impl Magic {
     pub const fn purpose(self) -> Purpose {
         match self {

@@ -129,6 +129,21 @@ pub enum Card {
     Squall,
 }
 
+#[repr(u8)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Hash)]
+pub enum Level {
+    One,
+    Two,
+    Three,
+    Four,
+    Five,
+    Six,
+    Seven,
+    Eight,
+    Nine,
+    Ten,
+}
+
 impl Card {
     pub const fn level(self) -> Level {
         match self {

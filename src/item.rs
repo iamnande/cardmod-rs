@@ -210,6 +210,31 @@ pub enum Item {
     LuvLuvG,
 }
 
+#[repr(u8)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Hash)]
+pub enum Purpose {
+    Restorative,
+    Refinement,
+    ForbiddenMedicine,
+    StatusRecovery,
+    Invincibility,
+    SpellStones,
+    GFSummons,
+    Shelters,
+    GFRecovery,
+    RenameCard,
+    GFAbility,
+    CommandAbility,
+    GFEnhancement,
+    CharacterAbility,
+    Ammo,
+    BlueMagic,
+    GFCompatibility,
+    Fuel,
+    StatBoosting,
+    LuvLuvG,
+}
+
 impl Item {
     pub const fn purpose(self) -> Purpose {
         match self {
@@ -243,8 +268,10 @@ impl Item {
             | Item::LifeRing
             | Item::DragonFang => Purpose::Refinement,
 
+            // forbidden medicine
             Item::Elixir | Item::Megalixir => Purpose::ForbiddenMedicine,
 
+            // status recovery
             Item::Antidote
             | Item::Soft
             | Item::EyeDrops
@@ -253,11 +280,12 @@ impl Item {
             | Item::Remedy
             | Item::RemedyPlus => Purpose::StatusRecovery,
 
-            Item::HeroTrial
-            | Item::Hero
-            | Item::HolyWarTrial
-            | Item::HolyWar => Purpose::Invincibility,
+            // invincibility
+            Item::HeroTrial | Item::Hero | Item::HolyWarTrial | Item::HolyWar => {
+                Purpose::Invincibility
+            }
 
+            // spell stones
             Item::ShellStone
             | Item::ProtectStone
             | Item::AuraStone
@@ -267,19 +295,21 @@ impl Item {
             | Item::MeteorStone
             | Item::UltimaStone => Purpose::SpellStones,
 
-            Item::GysahlGreens
-            | Item::PhoenixPinion
-            | Item::Friendship => Purpose::GFSummon,
+            // gf summons
+            Item::GysahlGreens | Item::PhoenixPinion | Item::Friendship => Purpose::GFSummons,
 
+            // shelters
             Item::Tent | Item::PetHouse | Item::Cottage => Purpose::Shelters,
 
-            Item::GPotion
-            | Item::GHiPotion
-            | Item::GMegaPotion
-            | Item::GReturner => Purpose::GFRecovery,
+            // gf recovery
+            Item::GPotion | Item::GHiPotion | Item::GMegaPotion | Item::GReturner => {
+                Purpose::GFRecovery
+            }
 
+            // rename card
             Item::RenameCard => Purpose::RenameCard,
 
+            // gf abilities
             Item::HPJScroll
             | Item::StrJScroll
             | Item::VitJScroll
@@ -293,6 +323,7 @@ impl Item {
             | Item::StatusGuard
             | Item::RosettaStone => Purpose::GFAbility,
 
+            // command ability
             Item::MagicScroll
             | Item::GFScroll
             | Item::DrawScroll
@@ -305,6 +336,7 @@ impl Item {
             | Item::HungryCookpot
             | Item::MegsAmulet => Purpose::CommandAbility,
 
+            // gf enhancement
             Item::SteelPipe
             | Item::StarFragment
             | Item::EnergyCrystal
@@ -314,6 +346,7 @@ impl Item {
             | Item::GoldArmor
             | Item::DiamondArmor => Purpose::GFEnhancement,
 
+            // character ability
             Item::RegenRing
             | Item::GiantsRing
             | Item::GaeasRing
@@ -342,6 +375,7 @@ impl Item {
             | Item::ThreeStars
             | Item::Ribbon => Purpose::CharacterAbility,
 
+            // ammo
             Item::NormalAmmo
             | Item::ShotgunAmmo
             | Item::DarkAmmo
@@ -351,6 +385,7 @@ impl Item {
             | Item::APAmmo
             | Item::PulseAmmo => Purpose::Ammo,
 
+            // blue magic
             Item::SpiderWeb
             | Item::CoralFragment
             | Item::CurseSpike
@@ -367,6 +402,7 @@ impl Item {
             | Item::PowerGenerator
             | Item::DarkMatter => Purpose::BlueMagic,
 
+            // gf compatability
             Item::BombFragment
             | Item::RedFang
             | Item::ArcticWind
@@ -388,8 +424,10 @@ impl Item {
             | Item::CactusThorn
             | Item::ShamanStone => Purpose::GFCompatibility,
 
+            // fuel
             Item::Fuel => Purpose::Fuel,
 
+            // stat boosts
             Item::HPUp
             | Item::StrUp
             | Item::VitUp
@@ -398,6 +436,7 @@ impl Item {
             | Item::SpdUp
             | Item::LuckUp => Purpose::StatBoosting,
 
+            // wubba lubba dub dub
             Item::LuvLuvG => Purpose::LuvLuvG,
         }
     }
@@ -510,7 +549,7 @@ impl Item {
             Item::MegsAmulet => "Meg's Amulet",
 
             // GF enhancement
-            Item::StellPipe => "Stell Pipe",
+            Item::SteelPipe => "Steel Pipe",
             Item::StarFragment => "Star Fragment",
             Item::EnergyCrystal => "Energy Crystal",
             Item::SamanthaSoul => "Samantha Soul",
@@ -537,7 +576,7 @@ impl Item {
             Item::RoyalCrown => "Royal Crown",
             Item::JetEngine => "Jet Engine",
             Item::RocketEngine => "Rocket Engine",
-            Item::MoonCurain => "Moon Curain",
+            Item::MoonCurtain => "Moon Curtain",
             Item::SteelCurtain => "Steel Curtain",
             Item::GlowCurtain => "Glow Curtain",
             Item::Accelerator => "Accelerator",
@@ -579,6 +618,23 @@ impl Item {
             Item::ChefsKnife => "Chef's Knife",
             Item::CactusThorn => "Cactus Thorn",
             Item::ShamanStone => "Shaman Stone",
+
+            // blue magic
+            Item::SpiderWeb => "Spider Web",
+            Item::CoralFragment => "Coral Fragment",
+            Item::CurseSpike => "Curse Spike",
+            Item::BlackHole => "Black Hole",
+            Item::WaterCrystal => "Water Crystal",
+            Item::Missile => "Missile",
+            Item::MysteryFluid => "Mystery Fluid",
+            Item::RunningFire => "Running Fire",
+            Item::InfernoFang => "Inferno Fang",
+            Item::MalboroTentacle => "Malboro Tenteacle",
+            Item::Whisper => "Whisper",
+            Item::LaserCannon => "Laser Cannon",
+            Item::Barrier => "Barrier",
+            Item::PowerGenerator => "Power Generator",
+            Item::DarkMatter => "Dark Matter",
 
             // fuel
             Item::Fuel => "Fuel",
